@@ -13,7 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.mehedi.platzistore.R
 import com.mehedi.platzistore.databinding.FragmentLoginBinding
 import com.mehedi.platzistore.model.data.login.RequestLogin
+import com.mehedi.platzistore.utils.PrefsManager
+import com.mehedi.platzistore.utils.TOKEN_KEY
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -21,6 +24,10 @@ class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
 
     private val viewmodel: LoginViewModel by viewModels()
+
+
+    @Inject
+    lateinit var prefsManager: PrefsManager
 
 
     override fun onCreateView(
@@ -43,14 +50,15 @@ class LoginFragment : Fragment() {
             val email = binding.userEmail?.text.toString()
             val password = binding.password.text.toString()
 
-            handleLogin(email, password)
+
+            // handleLogin(email, password)
+            handleLogin("john@mail.com", "changeme")
 
         }
 
 
         binding.registerBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-
 
 
         }
@@ -62,6 +70,10 @@ class LoginFragment : Fragment() {
 
             if (!it.accessToken.isNullOrBlank()) {
                 Toast.makeText(requireContext(), "Login success ! ", Toast.LENGTH_SHORT).show()
+
+                prefsManager.setPrefs(TOKEN_KEY, it.accessToken.toString())
+
+                findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
 
             }
 

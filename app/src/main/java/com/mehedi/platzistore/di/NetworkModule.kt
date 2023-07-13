@@ -1,11 +1,14 @@
 package com.mehedi.platzistore.di
 
-import com.mehedi.platzistore.network.AuthService
+import com.mehedi.platzistore.services.AuthService
+import com.mehedi.platzistore.services.UserService
+import com.mehedi.platzistore.utils.AuthInterceptor
 import com.mehedi.platzistore.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -14,20 +17,34 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
+
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    fun provideHttpClient(interceptor: AuthInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
 
     @Provides
     @Singleton
-    fun providesPlatziApi(retrofit: Retrofit): AuthService {
-        return retrofit.create(AuthService::class.java)
+    fun providesRetrofit(): Retrofit.Builder {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesAuthService(retrofit: Retrofit.Builder): AuthService {
+        return retrofit.build().create(AuthService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesUserService(retrofit: Retrofit.Builder, client: OkHttpClient): UserService {
+        return retrofit.client(client).build().create(UserService::class.java)
     }
 
 
