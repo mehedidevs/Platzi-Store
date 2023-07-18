@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
 
                 prefsManager.setPrefs(TOKEN_KEY, it.accessToken.toString())
 
-                findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_productFragment)
 
             }
 

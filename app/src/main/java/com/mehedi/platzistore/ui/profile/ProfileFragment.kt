@@ -36,10 +36,6 @@ class ProfileFragment : Fragment() {
 
         viewModel.profileResponse.observe(viewLifecycleOwner) {
 
-            Log.d("TAG", "${it.message()}: ")
-            Log.d("TAG", "${it.code()}: ")
-            Log.d("TAG", "${it.body()}: ")
-            Log.d("TAG", "${it.errorBody()}: ")
 
             if (it.isSuccessful) {
 

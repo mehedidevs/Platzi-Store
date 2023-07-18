@@ -14,8 +14,8 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_loginFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -27,4 +27,18 @@
         android:name="com.mehedi.platzistore.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.mehedi.platzistore.ui.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" >
+        <action
+            android:id="@+id/action_productFragment_to_productFragmentSingle"
+            app:destination="@id/productFragmentSingle" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragmentSingle"
+        android:name="com.mehedi.platzistore.ui.product.ProductFragmentSingle"
+        android:label="fragment_product_single"
+        tools:layout="@layout/fragment_product_single" />
 </navigation>
