@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/uplaodFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -41,4 +41,9 @@
         android:name="com.mehedi.platzistore.ui.product.ProductFragmentSingle"
         android:label="fragment_product_single"
         tools:layout="@layout/fragment_product_single" />
+    <fragment
+        android:id="@+id/uplaodFragment"
+        android:name="com.mehedi.platzistore.ui.file.UplaodFragment"
+        android:label="fragment_uplaod"
+        tools:layout="@layout/fragment_uplaod" />
 </navigation>

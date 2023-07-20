@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.file.UplaodFragment">
+
+
+    <ImageView
+        android:id="@+id/pIV"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_placeholder" />
+
+
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/uploadBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="Upload Image" />
+
+    <LinearLayout
+        android:id="@+id/responseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Uploaded Image"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+
+        <ImageView
+            android:id="@+id/pIVOnline"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_placeholder"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

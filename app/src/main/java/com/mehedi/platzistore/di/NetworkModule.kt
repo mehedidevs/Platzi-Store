@@ -2,6 +2,7 @@ package com.mehedi.platzistore.di
 
 import com.mehedi.platzistore.services.AuthService
 import com.mehedi.platzistore.services.ProductService
+import com.mehedi.platzistore.services.UploadService
 import com.mehedi.platzistore.services.UserService
 import com.mehedi.platzistore.utils.AuthInterceptor
 import com.mehedi.platzistore.utils.BASE_URL
@@ -40,6 +41,13 @@ class NetworkModule {
     @Singleton
     fun providesAuthService(retrofit: Retrofit.Builder): AuthService {
         return retrofit.build().create(AuthService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesUploadService(retrofit: Retrofit.Builder): UploadService {
+        return retrofit.build().create(UploadService::class.java)
     }
 
 
