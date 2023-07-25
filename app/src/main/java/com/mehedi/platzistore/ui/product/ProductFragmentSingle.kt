@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
-import com.mehedi.platzistore.R
 import com.mehedi.platzistore.databinding.FragmentProductSingleBinding
-import com.mehedi.platzistore.model.data.product.ResponseProduct
+import com.mehedi.platzistore.model.data.product.ResponseProductItem
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -56,7 +55,7 @@ class ProductFragmentSingle : Fragment() {
 
     }
 
-    private fun setProduct(it: ResponseProduct) {
+    private fun setProduct(it: ResponseProductItem) {
 
 
         binding.titleTextView.text = it.title

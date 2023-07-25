@@ -4,15 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mehedi.platzistore.model.data.login.RequestLogin
-import com.mehedi.platzistore.model.data.login.ResponseLogin
-import com.mehedi.platzistore.model.data.product.ResponseProduct
-import com.mehedi.platzistore.model.data.profile.ResponseProfile
-import com.mehedi.platzistore.model.repositories.AuthRepo
+import com.mehedi.platzistore.model.data.product.ResponseProductItem
 import com.mehedi.platzistore.model.repositories.ProductRepo
-import com.mehedi.platzistore.model.repositories.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,14 +14,17 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(private val repo: ProductRepo) : ViewModel() {
 
-    private val _response = MutableLiveData<Response<List<ResponseProduct>>>()
+    private val _response = MutableLiveData<Response<List<ResponseProductItem>>>()
 
-    val productResponse: LiveData<Response<List<ResponseProduct>>> = _response
+    val productResponse: LiveData<Response<List<ResponseProductItem>>> = _response
 
 
-    private val _responseSingle = MutableLiveData<Response<ResponseProduct>>()
+    private val _responseSingle = MutableLiveData<Response<ResponseProductItem>>()
 
-    val productResponseSingle: LiveData<Response<ResponseProduct>> = _responseSingle
+    val productResponseSingle: LiveData<Response<ResponseProductItem>> = _responseSingle
+
+
+    val data = repo.getData()
 
 
     fun getAllProduct() {

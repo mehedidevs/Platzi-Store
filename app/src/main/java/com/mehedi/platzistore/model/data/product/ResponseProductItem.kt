@@ -4,7 +4,7 @@ package com.mehedi.platzistore.model.data.product
 import com.google.gson.annotations.SerializedName
 import com.mehedi.platzistore.model.data.category.Category
 
-data class ResponseProduct(
+data  class ResponseProductItem(
     @SerializedName("category")
     var category: Category?,
     @SerializedName("creationAt")

@@ -1,7 +1,9 @@
 package com.mehedi.platzistore.ui.product
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +12,8 @@ import coil.load
 import com.mehedi.platzistore.databinding.ItemProductBinding
 import com.mehedi.platzistore.model.data.product.ResponseProductItem
 
-class ProductAdapter(var listener: Listener) :
-    ListAdapter<ResponseProductItem, ProductAdapter.ProductViewHolder>(COMPARATOR) {
+class ProductAdapterPaging(var listener: Listener) :
+    PagingDataAdapter<ResponseProductItem, ProductAdapterPaging.ProductViewHolder>(COMPARATOR) {
 
     interface Listener {
         fun productClick(productId: Int)
@@ -47,7 +49,10 @@ class ProductAdapter(var listener: Listener) :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        getItem(position).let {
+        getItem(position)?.let {
+
+            Log.i("TAG", "onBindViewHolder: $it ")
+
             holder.binding.titleTextView.text = it.title
             holder.binding.descriptionTextView.text = it.description
             holder.binding.priceTextView.text = "Price : $${it.price}"
