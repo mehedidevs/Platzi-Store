@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.mehedi.platzistore.model.data.product.ResponseProductItem
 import com.mehedi.platzistore.model.repositories.ProductRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -24,7 +26,7 @@ class ProductViewModel @Inject constructor(private val repo: ProductRepo) : View
     val productResponseSingle: LiveData<Response<ResponseProductItem>> = _responseSingle
 
 
-    val data = repo.getData()
+    val data = repo.getData().cachedIn(viewModelScope)
 
 
     fun getAllProduct() {

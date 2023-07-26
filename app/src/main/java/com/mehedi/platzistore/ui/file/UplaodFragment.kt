@@ -12,10 +12,11 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import coil.load
+
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.mehedi.platzistore.R
 import com.mehedi.platzistore.databinding.FragmentUplaodBinding
+import com.mehedi.platzistore.utils.load
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -96,7 +97,7 @@ class UplaodFragment : Fragment() {
 
                 binding.responseLayout.visibility = View.VISIBLE
 
-                binding.pIVOnline.load(it.body()?.location)
+                binding.pIVOnline.load(it.body()?.location!!)
 
 
             }

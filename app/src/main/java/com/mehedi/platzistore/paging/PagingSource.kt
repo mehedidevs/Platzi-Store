@@ -5,27 +5,32 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mehedi.platzistore.model.data.product.ResponseProductItem
 import com.mehedi.platzistore.services.ProductService
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class PagingSource
-@Inject constructor(private val service: ProductService) :
+class PagingSource @Inject constructor(private val service: ProductService) :
     PagingSource<Int, ResponseProductItem>() {
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResponseProductItem> {
-        val position = params.key ?: 0
+        val page = params.key ?: 0
+        Log.d("TAG", "page: $page")
+
+        Log.d("TAG", "offset: ${page * params.loadSize}")
+        val response = service.getAllProductPaging(page * params.loadSize, params.loadSize)
+        // val response = service.getAllProductPaging(170, params.loadSize)
 
         return try {
-            val response = service.getAllProductPaging(params.loadSize, 10)
 
-            Log.d("TAG", "load: ${response.size} ")
 
+            //Log.d("TAG", "load: ${response.size} ")
+            if (page != 0) delay(1000)
 
 
             LoadResult.Page(
                 data = response,
-                prevKey = if (position == 0) null else position - 1,
-                nextKey = if (response.isEmpty()) null else position + 1
+                prevKey = if (page == 0) null else page - 1,
+                nextKey = if (response.isEmpty()) null else page + 1
             )
 
 
@@ -44,7 +49,7 @@ class PagingSource
 
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(10) ?: anchorPage?.nextKey?.minus(10)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
 
 

@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+
 
 import com.mehedi.platzistore.databinding.ItemProductBinding
 import com.mehedi.platzistore.model.data.product.ResponseProductItem
+import com.mehedi.platzistore.utils.load
 
 class ProductAdapter(var listener: Listener) :
     ListAdapter<ResponseProductItem, ProductAdapter.ProductViewHolder>(COMPARATOR) {
@@ -71,7 +72,7 @@ class ProductAdapter(var listener: Listener) :
 
             it.category?.let { ctg ->
                 holder.binding.categoryNameTextView.text = ctg.name
-                holder.binding.categoryImageView.load(ctg.image)
+                holder.binding.categoryImageView.load(ctg.image!!)
 
             }
 

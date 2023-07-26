@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+
 
 import com.mehedi.platzistore.databinding.ItemProductBinding
 import com.mehedi.platzistore.model.data.product.ResponseProductItem
+import com.mehedi.platzistore.utils.load
 
 class ProductAdapterPaging(var listener: Listener) :
     PagingDataAdapter<ResponseProductItem, ProductAdapterPaging.ProductViewHolder>(COMPARATOR) {
@@ -51,32 +52,42 @@ class ProductAdapterPaging(var listener: Listener) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         getItem(position)?.let {
 
-            Log.i("TAG", "onBindViewHolder: $it ")
 
-            holder.binding.titleTextView.text = it.title
+            holder.binding.titleTextView.text = "${it.id} ${it.title}"
             holder.binding.descriptionTextView.text = it.description
             holder.binding.priceTextView.text = "Price : $${it.price}"
 
-            it.images?.get(0)?.let { img_url ->
-                holder.binding.image1.load(img_url)
+
+            for (i in it.images.indices) {
+
+                Log.i("TAG", "index: $i ")
+                when (i) {
+                    0 -> {
+                        holder.binding.image1.load(it.images[i]!!)
+                    }
+
+                    1 -> {
+                        holder.binding.image2.load(it.images[i]!!)
+                    }
+
+                    2 -> {
+                        holder.binding.image3.load(it.images[i]!!)
+                    }
+
+                }
+
+
+                it.images[0]?.let { img_url ->
+                    // holder.binding.image1.load(img_url)
+                }
             }
-
-            it.images?.get(1)?.let { img_url ->
-                holder.binding.image2.load(img_url)
-            }
-
-            it.images?.get(2)?.let { img_url ->
-                holder.binding.image3.load(img_url)
-
-            }
-
 
 
 
 
             it.category?.let { ctg ->
                 holder.binding.categoryNameTextView.text = ctg.name
-                holder.binding.categoryImageView.load(ctg.image)
+                holder.binding.categoryImageView.load(ctg.image!!)
 
             }
 
