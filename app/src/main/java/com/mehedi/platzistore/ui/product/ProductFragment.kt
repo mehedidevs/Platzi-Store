@@ -100,15 +100,15 @@ class ProductFragment : Fragment(), ProductAdapter.Listener, ProductAdapterPagin
 
     }
 
-    private fun toggle(show: Boolean) {
-
-
-        val transition: Transition = Slide(Gravity.BOTTOM)
-        transition.duration = 10
-        transition.addTarget(binding.bottomNavigationView)
-        TransitionManager.beginDelayedTransition(binding.root, transition)
-        binding.bottomNavigationView.visibility = if (show) View.VISIBLE else View.GONE
-    }
+//    private fun toggle(show: Boolean) {
+//
+//
+//        val transition: Transition = Slide(Gravity.BOTTOM)
+//        transition.duration = 10
+//        transition.addTarget(binding.bottomNavigationView)
+//        TransitionManager.beginDelayedTransition(binding.root, transition)
+//        binding.bottomNavigationView.visibility = if (show) View.VISIBLE else View.GONE
+//    }
 
 
 }

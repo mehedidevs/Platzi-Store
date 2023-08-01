@@ -6,9 +6,6 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import coil.load
 import coil.request.CachePolicy
-import coil.transform.CircleCropTransformation
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 
 
 const val BASE_URL = "https://api.escuelajs.co/api/v1/"

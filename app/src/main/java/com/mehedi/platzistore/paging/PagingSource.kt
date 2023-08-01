@@ -14,6 +14,7 @@ class PagingSource @Inject constructor(private val service: ProductService) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResponseProductItem> {
         val page = params.key ?: 0
+
         Log.d("TAG", "page: $page")
 
         Log.d("TAG", "offset: ${page * params.loadSize}")
@@ -24,7 +25,7 @@ class PagingSource @Inject constructor(private val service: ProductService) :
 
 
             //Log.d("TAG", "load: ${response.size} ")
-            if (page != 0) delay(1000)
+          //  if (page != 0) delay(1000)
 
 
             LoadResult.Page(

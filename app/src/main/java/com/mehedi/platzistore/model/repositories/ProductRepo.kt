@@ -15,21 +15,21 @@ class ProductRepo @Inject constructor(
     ) {
 
 
-    val data = Pager(
-        PagingConfig(
-            pageSize = 10,
-            initialLoadSize = 10
-        )
-    ) {
-
-        PagingSource(service)
-
-
-    }
+//    val data = Pager(
+//        PagingConfig(
+//            pageSize = 10,
+//            initialLoadSize = 10
+//        )
+//    ) {
+//
+//        PagingSource(service)
+//
+//
+//    }
 
 
     fun getData() = Pager(
-        config = PagingConfig(pageSize = 10, maxSize = 100, initialLoadSize = 10),
+        config = PagingConfig(pageSize = 10,initialLoadSize = 10),
         pagingSourceFactory = {
             PagingSource(service)
         }
