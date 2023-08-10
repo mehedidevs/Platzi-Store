@@ -19,8 +19,6 @@ class PrefsManager @Inject constructor(@ApplicationContext context: Context) {
     fun getPrefs(key: String): String {
         val prefsValue = prefs.getString(key, "")
         return prefsValue.toString()
-
-
     }
 
 

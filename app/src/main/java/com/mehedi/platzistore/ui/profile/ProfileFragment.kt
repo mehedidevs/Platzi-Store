@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.mehedi.platzistore.R
 
 
 import com.mehedi.platzistore.databinding.FragmentProfileBinding
@@ -14,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
-    lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
 
     private val viewModel: ProfileViewModel by viewModels()
 
@@ -44,6 +46,9 @@ class ProfileFragment : Fragment() {
 
                 }
 
+
+            }else{
+                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
 
             }
 

@@ -11,17 +11,21 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
 import com.mehedi.platzistore.R
+import com.mehedi.platzistore.base.BaseFragment
 import com.mehedi.platzistore.databinding.FragmentLoginBinding
 import com.mehedi.platzistore.model.data.login.RequestLogin
 import com.mehedi.platzistore.utils.PrefsManager
+import com.mehedi.platzistore.utils.REFRESH_KEY
 import com.mehedi.platzistore.utils.TOKEN_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate
 
-    lateinit var binding: FragmentLoginBinding
+){
+
 
     private val viewmodel: LoginViewModel by viewModels()
 
@@ -30,16 +34,7 @@ class LoginFragment : Fragment() {
     lateinit var prefsManager: PrefsManager
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-        return binding.root
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +67,8 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Login success ! ", Toast.LENGTH_SHORT).show()
 
                 prefsManager.setPrefs(TOKEN_KEY, it.accessToken.toString())
+                prefsManager.setPrefs(REFRESH_KEY, it.refreshToken.toString())
+
 
                 findNavController().navigate(R.id.action_loginFragment_to_productFragment)
 

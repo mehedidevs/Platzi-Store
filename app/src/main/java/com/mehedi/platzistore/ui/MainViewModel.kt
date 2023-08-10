@@ -1,4 +1,4 @@
-package com.mehedi.platzistore.ui.profile
+package com.mehedi.platzistore.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,26 +6,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mehedi.platzistore.model.data.login.RequestLogin
 import com.mehedi.platzistore.model.data.login.ResponseLogin
-import com.mehedi.platzistore.model.data.profile.ResponseProfile
+import com.mehedi.platzistore.model.data.token.RequestToken
+import com.mehedi.platzistore.model.data.token.ResponseToken
 import com.mehedi.platzistore.model.repositories.AuthRepo
-import com.mehedi.platzistore.model.repositories.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val repo: UserRepo) : ViewModel() {
+class MainViewModel @Inject constructor(private val repo: AuthRepo) : ViewModel() {
 
-    private val _response = MutableLiveData<Response<ResponseProfile>>()
+    private val _tokenResponse = MutableLiveData<Response<ResponseToken>>()
 
-    val profileResponse: LiveData<Response<ResponseProfile>> = _response
+    val tokenResponse: LiveData<Response<ResponseToken>> = _tokenResponse
 
 
-    fun getProfile() {
+    fun token(request: RequestToken) {
+
         viewModelScope.launch {
-            _response.postValue(repo.userProfile())
+            _tokenResponse.postValue(repo.token(request))
         }
 
 

@@ -1,21 +1,20 @@
 package com.mehedi.platzistore.ui.product
 
-import android.R
+
 import android.os.Bundle
-import android.service.media.MediaBrowserService.BrowserRoot
-import android.transition.Slide
-import android.transition.Transition
-import android.transition.TransitionManager
-import android.view.Gravity
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.mehedi.platzistore.R
+import com.mehedi.platzistore.base.BaseFragment
 
 import com.mehedi.platzistore.databinding.FragmentProductBinding
 import com.mehedi.platzistore.utils.slideDown
@@ -24,25 +23,29 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class ProductFragment : Fragment(), ProductAdapter.Listener, ProductAdapterPaging.Listener {
-    lateinit var binding: FragmentProductBinding
+class ProductFragment : BaseFragment<FragmentProductBinding>(FragmentProductBinding::inflate), ProductAdapter.Listener, ProductAdapterPaging.Listener {
+
 
     private val viewModel: ProductViewModel by activityViewModels()
     lateinit var adapter: ProductAdapterPaging
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProductBinding.inflate(inflater, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         viewModel.getAllProduct()
 
         adapter = ProductAdapterPaging(this)
         binding.productRcv.adapter = adapter
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding.btnCompose.setOnClickListener {
+
+            findNavController().navigate(R.id.action_productFragment_to_profileFragment)
+
+
+        }
+
+
 
         binding.productRcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

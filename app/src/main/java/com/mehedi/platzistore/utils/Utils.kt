@@ -10,6 +10,7 @@ import coil.request.CachePolicy
 
 const val BASE_URL = "https://api.escuelajs.co/api/v1/"
 const val TOKEN_KEY = "access_token_key"
+const val REFRESH_KEY = "refresh_token_key"
 
 fun ImageView.load(imageUrl: String) {
 
